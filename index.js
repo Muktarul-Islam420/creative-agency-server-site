@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(fileUpload());
 
-const port = 5000;
+const port = 4000;
 
 app.get('/', (req, res) => {
-    res.send("hello from db it's working working")
+    res.send("Your server is running,don't worry about this")
 })
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -27,7 +27,7 @@ client.connect(err => {
     const serviceCollection = client.db(process.env.DB_NAME).collection("services");
     const clientOrderCollection = client.db(process.env.DB_NAME).collection("clientOrders");
     const reviewCollection = client.db(process.env.DB_NAME).collection("clientReviews");
-
+    console.log("Connection has been successfully")
     app.post('/addAdmin', (req, res) => { // add admin
         adminCollection.insertOne(req.body)
             .then(result => {
